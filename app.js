@@ -1,4 +1,4 @@
-// api key : 021b6592f1d6cd88cabae5596138c71e
+
 
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
