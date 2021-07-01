@@ -27,18 +27,6 @@ body{
     font-size: 3em;
     font-weight: 900;
 }
-.temperature-value p{
-    font-size: 3em;
-    padding: 10px 0;    
-}
-.temperature-value p:hover{
-    
-}
-.temperature-value span{
-    color: #293251;
-    font-size: 0.5em;
-}
-
 .notification{
     background-color: #f8d7da;
     display: none;
@@ -48,6 +36,23 @@ body{
     color: #721c24;
     font-size: 1.2em;
     padding: 10px 0;
+}
+
+.temperature-value p{
+    font-size: 3em;
+    padding: 10px 0;    
+}
+.temperature-value p:hover{
+    cursor: pointer;
+    
+}
+.temperature-value span{
+    color: #293251;
+    font-size: 0.5em;
+}
+.conversion{
+    font-size: 0.8em;
+
 }
 .weather-icon img{
     display: block;
