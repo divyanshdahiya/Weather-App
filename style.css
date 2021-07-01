@@ -42,6 +42,7 @@ body{
 .notification{
     background-color: #f8d7da;
     display: none;
+    border-radius: 10px;
 }
 .notification p{
     color: #721c24;
