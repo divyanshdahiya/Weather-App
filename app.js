@@ -2,10 +2,13 @@
 
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
+const notificationElement = document.querySelector(".notification");
+const feelsLikeElement = document.querySelector(".temperature-feels-like-value p")
+const tempHighElement = document.querySelector(".temperature-high-value p")
+const tempLowElement = document.querySelector(".temperature-low-value p")
+const humidityElement = document.querySelector(".humidity p")
 const descElement = document.querySelector(".temperature-description p");
 const locationElement = document.querySelector(".location p");
-const notificationElement = document.querySelector(".notification");
-
 
 
 
@@ -54,10 +57,14 @@ function getWeather(latitude, longitude){
             return data;
         })
         .then(function(data){
-            
+            console.log(data)
             weather.temperature.value = Math.floor(data.main.temp - kelvin);
             weather.description = data.weather[0].description;
             weather.iconId = data.weather[0].icon;
+            weather.tempfeelslike = Math.floor(data.main.feels_like - kelvin);
+            weather.tempHigh = Math.floor(data.main.temp_max - kelvin +2);
+            weather.tempLow = Math.floor(data.main.temp_min - kelvin -4); 
+            weather.humidity = data.main.humidity;
             weather.city = data.name;
             weather.country = data.sys.country;
         })
@@ -69,6 +76,10 @@ function getWeather(latitude, longitude){
 function displayWeather(){  
     iconElement.innerHTML=` <img src="./icons/${weather.iconId}.png" alt="weather-icon"></img>`
     tempElement.innerHTML= `${weather.temperature.value}°<span>C</span>`
+    feelsLikeElement.innerHTML= `${weather.tempfeelslike}°<span>C</span>`
+    tempHighElement.innerHTML = `${weather.tempHigh}°<span>C</span>`
+    tempLowElement.innerHTML = `${weather.tempLow}°<span>C</span>`
+    humidityElement.innerHTML = `${weather.humidity}<span>%</span>`
     descElement.innerHTML=`${weather.description}`
     locationElement.innerHTML= `${weather.city}, ${weather.country}`
 }
