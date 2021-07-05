@@ -21,9 +21,6 @@ weather.temperature = {
 }
 
 
-document.body.style.backgroundImage = `url("https://source.unsplash.com/1600x900/?${weather.bgTitle}")`;
-
-
 if('geolocation' in navigator){
     navigator.geolocation.getCurrentPosition(setPosition, showError)
 }
@@ -70,21 +67,28 @@ function getWeather(latitude, longitude){
             weather.city = data.name;
             weather.country = data.sys.country;
             weather.bgTitle= data.weather[0].description;
-            console.log(weather.bgTitle)
+            
 
         })
         .then(function(){
             displayWeather();
+            displayBackground();
         });
 }
+
+
+function displayBackground (){
+    document.body.style.cssText = `background-image:linear-gradient(to bottom,rgba(0,0,0, 0),rgba(0,0,0, 100)), url(https://source.unsplash.com/1600x900/?${weather.bgTitle}) ;`
+}
+
 
 function displayWeather(){  
     iconElement.innerHTML=` <img src="./icons/${weather.iconId}.png" alt="weather-icon"></img>`
     tempElement.innerHTML= `${weather.temperature.value}°<span>C</span>`
-    feelsLikeElement.innerHTML= `${weather.tempfeelslike}°<span>C</span>`
-    tempHighElement.innerHTML = `${weather.tempHigh}°<span>C</span>`
-    tempLowElement.innerHTML = `${weather.tempLow}°<span>C</span>`
-    humidityElement.innerHTML = `${weather.humidity}<span>%</span>`
+    feelsLikeElement.innerHTML= `Feels like - ${weather.tempfeelslike}°<span>C</span>`
+    tempHighElement.innerHTML = `Max - ${weather.tempHigh}°<span>C</span>`
+    tempLowElement.innerHTML = `Min - ${weather.tempLow}°<span>C</span>`
+    humidityElement.innerHTML = `Humidity - ${weather.humidity}<span>%</span>`
     descElement.innerHTML=`${weather.description}`
     locationElement.innerHTML= `${weather.city}, ${weather.country}`
 }
@@ -102,7 +106,6 @@ tempElement.addEventListener("click", function(){
     if(weather.temperature.unit == "celsius"){
         let fahrenheit = celsiusToFahrenheit(weather.temperature.value);
         fahrenheit = Math.floor(fahrenheit);
-        
         tempElement.innerHTML = `${fahrenheit}°<span>F</span>`;
         weather.temperature.unit = "fahrenheit";
     }else{
