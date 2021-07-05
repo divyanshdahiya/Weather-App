@@ -1,6 +1,6 @@
 
 
-document.body.style.backgroundImage = "url(`https://source.unsplash.com/1600x900/?${bgTitle}`)";
+
 
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
@@ -21,7 +21,7 @@ weather.temperature = {
 }
 
 
-
+document.body.style.backgroundImage = `url("https://source.unsplash.com/1600x900/?${weather.bgTitle}")`;
 
 
 if('geolocation' in navigator){
@@ -69,8 +69,8 @@ function getWeather(latitude, longitude){
             weather.humidity = data.main.humidity;
             weather.city = data.name;
             weather.country = data.sys.country;
-            var bgTitle= data.weather[0].description;
-            
+            weather.bgTitle= data.weather[0].description;
+            console.log(weather.bgTitle)
 
         })
         .then(function(){
@@ -110,3 +110,4 @@ tempElement.addEventListener("click", function(){
         weather.temperature.unit = "celsius"
     }
 });
+
