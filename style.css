@@ -4,14 +4,12 @@
     margin: 0;
     padding: 0;
     font-family: 'Raleway', sans-serif;
-    color: white;
-    
+    color: white;  
 }
 body{
     background: black;
     background-size: cover;
-    background-attachment: fixed;
-    
+    background-attachment: fixed;   
 }
 .container{
     width: 28%;
@@ -20,8 +18,7 @@ body{
     border-radius: 10px;  
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-    padding-bottom: 20px;
-     
+    padding-bottom: 20px;    
 }
 .tittle{
     background: rgba(7, 7, 7, 0.8); 
@@ -42,9 +39,11 @@ body{
     font-size: 1.2em;
     padding: 10px 0;
 }
-
+.weather-container{
+    margin-top: 20px;
+}
 .location p{
-    margin-bottom: -40px;
+    margin: -20px 0 -40px 0 ; 
     padding: 30px;
     font-size: 3em;
 }
@@ -57,18 +56,12 @@ body{
 .weather-icon img{
     display: block;
     margin: 0 auto;
-    width: 30%;
-    
+    width: 30%; 
 }
 .temperature-value p{
     font-size: 6em;
     margin-top: -40px;
-    padding: 20px;
-      
-}
-.temperature-value p:hover{
-    cursor: pointer;
-    
+    padding: 20px;    
 }
 .temperature-value span{
     font-size: 0.7em;
@@ -78,7 +71,6 @@ body{
     font-size: 2em;
     margin-top: -20px;
 }
-
 .min-max-temp{
     display: flex;
     justify-content:space-around;
@@ -106,3 +98,63 @@ body{
         width: 95%;
     }
 }
+/*////////////////////////// TOGGLE SWITCH/////////////////// */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 34px;
+  }
+  .switch input {display:none;}
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2ab933ab;
+    -webkit-transition: .4s;
+    transition: .4s;
+     border-radius: 34px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color:  #ff4e4e98;
+  }
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(55px);
+  }
+  .slider:after
+  {
+   content:'° C';
+   color: white;
+   display: block;
+   position: absolute;
+   transform: translate(-50%,-50%);
+   top: 50%;
+   left: 50%;
+   font-size: 15px;
+   font-family: Verdana, sans-serif;
+  }
+   input:checked + .slider:after
+  {  
+    content:'° F';
+  }
+  

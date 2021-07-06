@@ -1,6 +1,6 @@
 
 
-
+// CONSTANS
 
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
@@ -11,14 +11,20 @@ const tempLowElement = document.querySelector(".temperature-low-value p")
 const humidityElement = document.querySelector(".humidity p")
 const descElement = document.querySelector(".temperature-description p");
 const locationElement = document.querySelector(".location p");
+const toggleSwitch = document.querySelector(".slider")
 
 
+
+// WEATHER OBJECT
 
 const weather = {};
 
 weather.temperature = {
     unit : "celsius"
 }
+
+
+// GEOLOCATOR
 
 
 if('geolocation' in navigator){
@@ -44,8 +50,11 @@ function showError (error){
 
 
 
+// FETCH API
+
 const kelvin = 273  
 const key = "021b6592f1d6cd88cabae5596138c71e"  
+
 
 function getWeather(latitude, longitude){
     let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
@@ -77,9 +86,11 @@ function getWeather(latitude, longitude){
 }
 
 
+
 function displayBackground (){
     document.body.style.cssText = `background-image:linear-gradient(to bottom,rgba(0,0,0, 0),rgba(0,0,0, 100)), url(https://source.unsplash.com/1600x900/?${weather.bgTitle}) ;`
 }
+
 
 
 function displayWeather(){  
@@ -94,23 +105,59 @@ function displayWeather(){
 }
 
 
+// FAHRENHITE TO CELCIUS CONVERTER
+
 
 function celsiusToFahrenheit(temperature){
     return (temperature * 9/5) + 32;
 }
 
 
-tempElement.addEventListener("click", function(){
+toggleSwitch.addEventListener("click", function(){
     if(weather.temperature.value === undefined) return;
     
     if(weather.temperature.unit == "celsius"){
-        let fahrenheit = celsiusToFahrenheit(weather.temperature.value);
-        fahrenheit = Math.floor(fahrenheit);
-        tempElement.innerHTML = `${fahrenheit}°<span>F</span>`;
+
+
+        let fahrenheitTempValue = celsiusToFahrenheit(weather.temperature.value);
+        fahrenheitTempValue = Math.floor(fahrenheitTempValue);
+        tempElement.innerHTML = `${fahrenheitTempValue}°<span>F</span>`;
+
+        let fahrenheitFeelsLike = celsiusToFahrenheit(weather.tempfeelslike);
+        fahrenheitFeelsLike = Math.floor(fahrenheitFeelsLike);
+        feelsLikeElement.innerHTML= `Feels like - ${fahrenheitFeelsLike}°<span>F</span>`
+
+        let fahrenheitTempHigh = celsiusToFahrenheit(weather.tempHigh);
+        fahrenheitTempHigh = Math.floor(fahrenheitTempHigh);
+        tempHighElement.innerHTML = `Max - ${fahrenheitTempHigh}°<span>F</span>`
+        
+        let fahrenheitTempLow = celsiusToFahrenheit(weather.tempLow);
+        fahrenheitTempLow = Math.floor(fahrenheitTempLow);
+        tempLowElement.innerHTML = `Min - ${fahrenheitTempLow}°<span>F</span>`
+        
+        
+
         weather.temperature.unit = "fahrenheit";
+
     }else{
+
         tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
+        feelsLikeElement.innerHTML= `Feels like - ${weather.tempfeelslike}°<span>C</span>`
+        tempHighElement.innerHTML = `Max - ${weather.tempHigh}°<span>C</span>`
+        tempLowElement.innerHTML = `Min - ${weather.tempLow}°<span>C</span>`
         weather.temperature.unit = "celsius"
+
     }
 });
 
+
+
+
+
+
+// ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗██████╗     ██████╗ ██╗   ██╗    ██████╗ ██╗██╗   ██╗██╗   ██╗ █████╗ ███╗   ██╗███████╗██╗  ██╗    
+// ██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝██╔══██╗    ██╔══██╗╚██╗ ██╔╝    ██╔══██╗██║██║   ██║╚██╗ ██╔╝██╔══██╗████╗  ██║██╔════╝██║  ██║    
+// ██║     ██████╔╝█████╗  ███████║   ██║   █████╗  ██║  ██║    ██████╔╝ ╚████╔╝     ██║  ██║██║██║   ██║ ╚████╔╝ ███████║██╔██╗ ██║███████╗███████║    
+// ██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██╔══╝  ██║  ██║    ██╔══██╗  ╚██╔╝      ██║  ██║██║╚██╗ ██╔╝  ╚██╔╝  ██╔══██║██║╚██╗██║╚════██║██╔══██║    
+// ╚██████╗██║  ██║███████╗██║  ██║   ██║   ███████╗██████╔╝    ██████╔╝   ██║       ██████╔╝██║ ╚████╔╝    ██║   ██║  ██║██║ ╚████║███████║██║  ██║    
+//  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═════╝     ╚═════╝    ╚═╝       ╚═════╝ ╚═╝  ╚═══╝     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝    
